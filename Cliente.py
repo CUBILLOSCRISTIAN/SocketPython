@@ -1,8 +1,8 @@
 import socket
 
 # Definir IP y puerto del servidor al que se conectará
-SERVER_HOST = '192.168.18.102'  # IP del servido
-SERVER_PORT = 12341             # Puerto del servidor
+SERVER_HOST = '192.168.1.15'  # IP del servido
+SERVER_PORT = 8080             # Puerto del servidor
 
 # Crear el socket TCP/IP
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

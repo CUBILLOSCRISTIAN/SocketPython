@@ -2,7 +2,7 @@ import socket
 
 # Definir IP y puerto del servidor
 HOST = '0.0.0.0'  # Escuchar en todas las interfaces
-PORT = 12341      # Puerto donde se escuchará
+PORT = 8080      # Puerto donde se escuchará
 
 # Crear el socket TCP/IP
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
