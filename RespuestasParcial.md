@@ -15,10 +15,10 @@
    ![SentKey](Images/Pregunta1.png)
     (imagen 1)
 
-    ![ReceivedKey](Images/Pregunta1.1.png)
+   ![ReceivedKey](Images/Pregunta1.1.png)
     (imagen 2)
 
-    ![Llave](Images/Key_salsa.png)
+   ![Llave](Images/Key_salsa.png)
     (imagen 3)
 
 
@@ -48,7 +48,7 @@
 1. *¿Cuáles son las ventajas y desventajas de utilizar un canal alterno para el intercambio de llaves simétricas en comparación con el primer escenario?*
 
    - **Ventajas**: Un canal alterno reduce las posibilidades de que un atacante intercepte la llave durante la transmisión en red.
-   - **Desventajas**: Requiere más esfuerzo logístico y si el canal alterno no es seguro, la llave podría ser comprometida.
+   - **Desventajas**: Requiere más esfuerzo logístico y si el canal alterno es inseguro, hay mayor posibilidad de que la llave sea comprometida.
 
 2. *¿Es posible que un atacante obtenga la llave simétrica de 256 bits en este escenario? ¿Por qué?*
 
