@@ -54,9 +54,15 @@
 
    Es **menos probable** que un atacante obtenga la llave simétrica en este escenario, ya que la transmisión de la llave se realiza por un canal distinto al de la comunicación regular.En nuestro caso es imposible obtener la llave simetrica, ya que no tenermos como obtener acceso al otro canal.
 
+   ![IMAGEN DE LOS PAQUETES](Images/Pregunta3.png)
+    (imagen 5)
+
 3. *Si el atacante logra capturar los paquetes cifrados con AES-256 en modo CBC, ¿podría descifrar los mensajes? Explique las posibles vulnerabilidades que podrían existir (por ejemplo, ataques de relleno).*
 
    Capturar los paquetes cifrados no permitiría descifrar los mensajes sin la llave. Sin embargo, el modo CBC es vulnerable a ataques como el de relleno (padding oracle), que puede permitir a un atacante manipular los mensajes cifrados o incluso descubrir información.
+
+   ![IMAGEN DE EL PAQUETE DEL MENSAJES](Images/Pregunta3.png)
+    (imagen 6)
 
 4. *Sugiera mejoras en la implementación para mitigar riesgos de seguridad.*
 
