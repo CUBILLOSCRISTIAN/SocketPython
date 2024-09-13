@@ -1,63 +1,80 @@
+## Proyecto de Comunicación Segura con Cifrado
 
-# Proyecto de Conexión Cliente-Servidor con Sockets en Python
+Este proyecto implementa un sistema de comunicación segura entre un cliente y un servidor utilizando dos métodos de cifrado diferentes: Salsa20 y AES-256-CBC. El proyecto consta de cuatro scripts principales:
 
-## Descripción
-Este proyecto implementa una conexión simple entre un cliente y un servidor utilizando sockets TCP/IP. El servidor escucha conexiones en un puerto específico y acepta solicitudes de clientes en la misma red local. Ambos pueden intercambiar mensajes una vez que se establece la conexión.
+1. `CLIENTE_SALSA_20.PY`
+2. `SERVIDOR_SALSA_20.PY`
+3. `CLIENTE_AES.PY`
+4. `SERVIDOR_AES.PY`
 
-## Requisitos
+### Descripción de los Scripts
+
+#### CLIENTE_SALSA_20.PY
+
+Este script implementa un cliente que se conecta a un servidor utilizando sockets y cifra los mensajes utilizando el algoritmo Salsa20. El flujo de trabajo es el siguiente:
+
+1. Se conecta al servidor especificado por la IP y el puerto.
+2. Recibe una clave simétrica del servidor.
+3. En un bucle, el cliente:
+   - Toma un mensaje de entrada del usuario.
+   - Cifra el mensaje utilizando Salsa20.
+   - Envía el mensaje cifrado al servidor.
+   - Recibe un mensaje cifrado del servidor.
+   - Descifra el mensaje recibido y lo muestra en la consola.
+4. La conexión se cierra cuando se recibe el mensaje "adios".
+
+#### SERVIDOR_SALSA_20.PY
+
+Este script implementa un servidor que se comunica con un cliente utilizando sockets y cifra los mensajes utilizando el algoritmo Salsa20. El flujo de trabajo es el siguiente:
+
+1. Escucha conexiones en una IP y puerto especificados.
+2. Acepta una conexión entrante de un cliente.
+3. Genera una clave simétrica y la envía al cliente.
+4. En un bucle, el servidor:
+   - Recibe un mensaje cifrado del cliente.
+   - Descifra el mensaje recibido y lo muestra en la consola.
+   - Toma un mensaje de entrada del usuario.
+   - Cifra el mensaje utilizando Salsa20.
+   - Envía el mensaje cifrado al cliente.
+5. La conexión se cierra cuando se recibe el mensaje "adios".
+
+#### CLIENTE_AES.PY
+
+Este script implementa un cliente que se conecta a un servidor utilizando sockets y cifra los mensajes utilizando el algoritmo AES-256-CBC. El flujo de trabajo es el siguiente:
+
+1. Carga una clave AES desde un archivo.
+2. Se conecta al servidor especificado por la IP y el puerto.
+3. Cifra un mensaje utilizando AES-256-CBC.
+4. Envía el IV y el mensaje cifrado al servidor.
+
+#### SERVIDOR_AES.PY
+
+Este script implementa un servidor que se comunica con un cliente utilizando sockets y cifra los mensajes utilizando el algoritmo AES-256-CBC. El flujo de trabajo es el siguiente:
+
+1. Genera una clave AES y la almacena en un archivo.
+2. Escucha conexiones en una IP y puerto especificados.
+3. Acepta una conexión entrante de un cliente.
+4. Recibe el IV y el mensaje cifrado del cliente.
+5. Descifra el mensaje recibido y lo muestra en la consola.
+
+### Requisitos
+
 - Python 3.x
-- Conexión a la misma red local para el cliente y servidor
-- Asegúrate de que el puerto que se utilice esté libre y permitido por el firewall
+- PyCryptodome (`pip install pycryptodome`)
 
-## Instalación
-1. Clona el repositorio o descarga los archivos del proyecto.
-2. Asegúrate de tener Python instalado.
-3. Configura la IP correcta en `cliente.py` para que apunte al servidor.
+### Ejecución
 
-## Uso
+1. **Servidor Salsa20**:
+   - Ejecutar `SERVIDOR_SALSA_20.PY` en una terminal.
+2. **Cliente Salsa20**:
+   - Ejecutar `CLIENTE_SALSA_20.PY` en otra terminal.
+3. **Servidor AES**:
+   - Ejecutar `SERVIDOR_AES.PY` en una terminal.
+4. **Cliente AES**:
+   - Ejecutar `CLIENTE_AES.PY` en otra terminal.
 
-### 1. Ejecutar el Servidor
-Primero, inicia el servidor en una máquina en la red local:
+### Notas
 
-```bash
-python servidor.py
-```
+- Asegúrese de que las IPs y puertos especificados en los scripts coincidan y sean accesibles entre el cliente y el servidor.
 
-El servidor comenzará a escuchar en la IP y el puerto especificado. Asegúrate de que el servidor esté en ejecución **antes** de que el cliente intente conectarse.
-
-### 2. Ejecutar el Cliente
-En otra máquina dentro de la misma red, ejecuta el cliente para conectarte al servidor:
-
-```bash
-python cliente.py
-```
-
-Especifica la dirección IP del servidor en `cliente.py`. Una vez conectado, puedes enviar mensajes al servidor y recibir respuestas.
-
-## Ejemplo de ejecución
-
-### Servidor
-```bash
-Servidor escuchando en 0.0.0.0:12345...
-Conexión establecida con ('192.168.18.103', 54321)
-Cliente: ¡Hola servidor!
-```
-
-### Cliente
-```bash
-Conectado al servidor 192.168.18.102:12345
-Tú: ¡Hola servidor!
-Servidor: Mensaje recibido por el servidor
-```
-
-## Problemas comunes
-### Error: `Address already in use`
-Este error ocurre cuando el puerto que estás intentando usar ya está en uso. Puedes resolverlo cambiando de puerto o liberando el puerto con:
-
-```bash
-sudo lsof -i :12345
-sudo kill -9 <PID>
-```
-
-### Error: `Connection refused`
-Asegúrate de que el servidor esté corriendo y que el puerto esté abierto.
+Este proyecto demuestra cómo implementar comunicación segura utilizando cifrado simétrico en Python.
