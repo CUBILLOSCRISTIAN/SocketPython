@@ -6,10 +6,12 @@ import os
 def encrypt_salsa20(key, plaintext, nonce):
     cipher = Salsa20.new(key=key, nonce=nonce)
     ciphertext = cipher.encrypt(plaintext)
-    return ciphertext
+    return nonce + ciphertext  # Enviar el nonce junto con el mensaje cifrado
 
 # Función para descifrar los datos
-def decrypt_salsa20(key, ciphertext, nonce):
+def decrypt_salsa20(key, nonce_and_ciphertext):
+    nonce = nonce_and_ciphertext[:8]  # Extraer el nonce
+    ciphertext = nonce_and_ciphertext[8:]  # Extraer el mensaje cifrado
     cipher = Salsa20.new(key=key, nonce=nonce)
     plaintext = cipher.decrypt(ciphertext)
     return plaintext
@@ -31,31 +33,29 @@ print(f"Conexión aceptada de {client_address}")
 key = os.urandom(32)  
 client_socket.sendall(key)
 
-print("Llave simétrica enviados al cliente")
+print("Llave simétrica enviada al cliente")
 
 # Recibir y enviar mensajes cifrados
 while True:
     # Recibir mensaje cifrado y el nonce del cliente
-    data = client_socket.recv(1024)
-    nonceRecived = client_socket.recv(8)
-    if not data:
+    nonce_and_ciphertext = client_socket.recv(1024)
+    if not nonce_and_ciphertext:
         break
     # Descifrar el mensaje recibido
-    decrypted_message = decrypt_salsa20(key, data,nonceRecived)
+    decrypted_message = decrypt_salsa20(key, nonce_and_ciphertext)
     print(f"Cliente salsa 20: {decrypted_message.decode('utf-8')}")
     if decrypted_message.decode('utf-8') == "adios":
         break
     
     # Enviar respuesta cifrada al cliente
     message = input("Servidor salsa 20: ").encode('utf-8')
-    nonceSent = os.urandom(8) 
+    nonce = os.urandom(8) 
 
     # Cifrar el mensaje
-    encrypted_message = encrypt_salsa20(key, message, nonceSent)
+    encrypted_message = encrypt_salsa20(key, message, nonce)
 
     # Enviar el mensaje cifrado y el nonce al cliente
-    client_socket.send(nonceSent)
-    client_socket.send(encrypted_message)
+    client_socket.sendall(encrypted_message)
 
 # Cerrar la conexión
 client_socket.close()
