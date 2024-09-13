@@ -5,7 +5,7 @@ from Crypto.Random import get_random_bytes
 
 # Configuración del servidor
 HOST = '0.0.0.0'
-PORT = 2020
+PORT = 5547
 
 # Función para descifrar un mensaje con AES-256 CBC
 def decrypt_message(key, iv, ciphertext):

@@ -4,8 +4,8 @@ from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
 
 # Configuración del cliente
-HOST = '127.0.0.1'
-PORT = 8080
+HOST = '192.168.1.8'
+PORT = 5547
 
 # Función para cifrar un mensaje con AES-256 CBC
 def encrypt_message(key, message):

@@ -60,7 +60,7 @@
 
 4. *Sugiera mejoras en la implementación para mitigar riesgos de seguridad.*
 
-   Implementar mecanismos de autenticación de mensajes como HMAC, asegurar que el canal alterno sea seguro y utilizar padding seguro (como PKCS7) para evitar ataques de relleno.
+   Para mejorar la seguridad al usar AES-256 en modo CBC, creemos que es fundamental agregar varias medidas adicionales. Primero, implementaríamos mecanismos de autenticación de mensajes como HMAC para asegurar que los datos no se hayan modificado y para verificar su integridad. Además, nos aseguraríamos de que el canal de comunicación sea seguro usando cifrado de transporte, como TLS, para proteger los datos mientras se transfieren. También utilizaríamos un esquema de padding seguro, como PKCS7, para prevenir problemas con el relleno. Finalmente, garantizaríamos que el Vector de Inicialización (IV) sea siempre aleatorio y único para cada cifrado, y manejaríamos las claves con mucho cuidado, asegurándonos de almacenarlas de forma segura.
 
 ---
 
@@ -68,8 +68,17 @@
 
 1. *Compare la seguridad ofrecida por los cifradores Salsa20 y AES-256 en modo CBC. ¿En qué escenarios uno podría ser preferido sobre el otro?*
 
-   Salsa20 es más rápido y consume menos recursos, lo que lo hace ideal para dispositivos con recursos limitados o comunicaciones en tiempo real. AES-256 en modo CBC, aunque más lento, es ampliamente considerado más seguro para datos que necesitan alta confidencialidad.
+      Preferimos **AES-256 en modo CBC** sobre **Salsa20**, principalmente por la robustez en la privacidad de la clave que ofrece. AES-256 proporciona una mayor seguridad en la gestión de la clave, ya que resulta mucho más difícil para un atacante obtenerla y comprometer la comunicación. Esto es crucial, especialmente cuando se considera que el cifrado debe ser a prueba de manipulaciones y accesible solo para los usuarios autorizados. Por lo tanto, en escenarios donde la seguridad y la protección de la clave son prioritarias, AES-256 se presenta como la opción más fiable.
 
 2. *Exponga sus conclusiones sobre la importancia de la gestión segura de llaves en protocolos de cifrado simétrico. ¿Qué métodos adicionales podrían implementarse para asegurar un intercambio seguro de llaves?*
 
-   La gestión de llaves es crítica, ya que comprometer la llave simétrica expone toda la comunicación. Métodos como Diffie-Hellman, el uso de certificados y la implementación de canales seguros (como TLS) son esenciales para un intercambio seguro de llaves.
+   ### Conclusiones sobre la Gestión Segura de Llaves en Protocolos de Cifrado Simétrico
+
+   La **gestión segura de llaves** es fundamental para mantener la integridad y confidencialidad en los protocolos de cifrado simétrico. Una mala administración de las llaves puede comprometer completamente el cifrado, permitiendo a los atacantes desencriptar mensajes y acceder a información sensible. 
+
+   Para garantizar un intercambio seguro de llaves, se deben implementar métodos adicionales como:
+
+   - **Uso de protocolos seguros**: Protocolos como **TLS** protegen la transmisión de llaves mediante cifrado de transporte.
+   - **Manejo adecuado de IVs**: Asegurar que el **vector de inicialización** sea aleatorio y único para cada cifrado.
+
+   En resumen, incorporar estas medidas adicionales es esencial para proteger eficazmente la información cifrada y evitar vulnerabilidades en la comunicación.
