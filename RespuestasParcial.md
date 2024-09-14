@@ -59,7 +59,7 @@
 
 3. *Si el atacante logra capturar los paquetes cifrados con AES-256 en modo CBC, ¿podría descifrar los mensajes? Explique las posibles vulnerabilidades que podrían existir (por ejemplo, ataques de relleno).*
 
-   Capturar los paquetes cifrados no permitiría descifrar los mensajes sin la llave como se menicono anteriormente. Sin embargo, el modo CBC es vulnerable a ataques como el de relleno (padding oracle), que puede permitir a un atacante manipular los mensajes cifrados o incluso descubrir información.
+   Capturar los paquetes cifrados no permitiría descifrar los mensajes sin la llave como se menciono anteriormente. Sin embargo, el modo CBC es vulnerable a ataques como el de relleno (padding oracle), que puede permitir a un atacante manipular los mensajes cifrados o incluso descubrir información.
 
 4. *Sugiera mejoras en la implementación para mitigar riesgos de seguridad.*
 
