@@ -52,7 +52,7 @@
 
 2. *¿Es posible que un atacante obtenga la llave simétrica de 256 bits en este escenario? ¿Por qué?*
 
-   Es **menos probable** que un atacante obtenga la llave simétrica en este escenario, ya que la transmisión de la llave se realiza por un canal distinto al de la comunicación regular.En nuestro caso es imposible obtener la llave simetrica, ya que no tenemos como obtener acceso al otro canal y se evidencia en la imagen 5.
+   Es **menos probable** que un atacante obtenga la llave simétrica en este escenario, ya que la transmisión de la llave se realiza por un canal distinto al de la comunicación regular. En nuestro caso es imposible obtener la llave simetrica, ya que no tenemos como obtener acceso al otro canal y se evidencia en la imagen 5.
 
    ![IMAGEN DE LOS PAQUETES](Images/Pregunta3.png)
     (imagen 5)
